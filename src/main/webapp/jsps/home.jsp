@@ -1,106 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mithun Technologies – 3D UI</title>
-
-<style>
-html,body{
-    margin:0;
-    height:100%;
-    background:#0b0b0b;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow:hidden;
-}
-
-/* 3D stage */
-.scene{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    perspective:1000px;
-}
-
-/* 3D card */
-.card{
-    width:520px;
-    height:320px;
-    background:linear-gradient(135deg,#111,#1f1f1f);
-    border-radius:18px;
-    box-shadow:0 40px 80px rgba(0,0,0,.6);
-    transform-style:preserve-3d;
-    transition:transform 0.1s linear;
-    padding:35px;
-    box-sizing:border-box;
-}
-
-/* depth layers */
-.card h1{
-    color:#fff;
-    transform:translateZ(40px);
-    margin:0 0 10px 0;
-}
-
-.card p{
-    color:#ccc;
-    transform:translateZ(30px);
-    margin:6px 0;
-}
-
-.card a{
-    color:#00d4ff;
-    font-weight:bold;
-    text-decoration:none;
-    transform:translateZ(50px);
-    display:inline-block;
-    margin-top:10px;
-}
-</style>
+  <title>Simple 3D Website</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
 </head>
-
 <body>
 
-<div class="scene">
-    <div class="card" id="card">
-
-        <h1>Mithun Technologies</h1>
-        <p>AWS | DevOps | Docker | Kubernetes | Terraform</p>
-        <p>Trainer : Bhaskar Reddy Lacchannagari</p>
-        <p>Bengaluru</p>
-
-        <a href="<%=request.getContextPath()%>/services/employee/getEmployeeDetails">
-            Get Employee Details (API)
-        </a>
-
-    </div>
-</div>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
 
 <script>
-const card = document.getElementById("card");
-const scene = document.querySelector(".scene");
+  // Scene
+  const scene = new THREE.Scene();
 
-scene.addEventListener("mousemove", (e) => {
+  // Camera
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  camera.position.z = 3;
 
-    const rect = scene.getBoundingClientRect();
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  // Cube
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  // Light  ✅ (MOST IMPORTANT)
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 5, 5);
+  scene.add(light);
 
-    const rotateX = -(y - centerY) / 20;
-    const rotateY = (x - centerX) / 20;
+  const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambient);
 
-    card.style.transform =
-        `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-});
+  // Animation loop  ✅
+  function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  }
 
-scene.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg)";
-});
+  animate();
+
+  // Resize fix
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 </script>
 
 </body>
