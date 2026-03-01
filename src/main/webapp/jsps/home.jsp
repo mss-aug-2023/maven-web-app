@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>3D Test</title>
+<title>Mithun Technologies - 3D</title>
+
 <style>
 html,body{
   margin:0;
@@ -11,15 +13,39 @@ html,body{
   overflow:hidden;
 }
 canvas{display:block;}
+#caption{
+  position:fixed;
+  bottom:25px;
+  left:25px;
+  color:#111;
+  background:rgba(255,255,255,0.85);
+  padding:12px 16px;
+  border-radius:10px;
+  font-family:Arial,Helvetica,sans-serif;
+}
+#caption a{
+  text-decoration:none;
+  color:#0066ff;
+  font-weight:bold;
+}
 </style>
 </head>
 <body>
+
+<div id="caption">
+  <b>Mithun Technologies</b><br>
+  AWS | DevOps | Docker | Kubernetes | Terraform<br>
+  Trainer : Bhaskar Reddy<br>
+  <a href="<%=request.getContextPath()%>/services/employee/getEmployeeDetails">
+    Get Employee Details
+  </a>
+</div>
 
 <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
 
 <script>
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xeeeeee);
+scene.background = new THREE.Color(0xf2f2f2);
 
 const camera = new THREE.PerspectiveCamera(
   60,
@@ -39,9 +65,8 @@ const mat = new THREE.MeshStandardMaterial({color:0x0077ff});
 const cube = new THREE.Mesh(geo,mat);
 scene.add(cube);
 
-/* lights (important) */
+/* lights */
 scene.add(new THREE.AmbientLight(0xffffff,0.6));
-
 const dir = new THREE.DirectionalLight(0xffffff,1);
 dir.position.set(3,5,2);
 scene.add(dir);
