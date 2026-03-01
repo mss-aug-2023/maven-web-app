@@ -9,10 +9,17 @@
 html,body{
   margin:0;
   width:100%;
-  height:200vh;   /* make page scrollable */
+  height:100%;
   overflow:auto;
 }
-canvas{display:block;}
+
+canvas{
+  display:block;
+  position:fixed;
+  top:0;
+  left:0;
+}
+
 #caption{
   position:fixed;
   bottom:25px;
