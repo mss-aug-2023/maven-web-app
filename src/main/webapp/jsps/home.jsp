@@ -72,10 +72,9 @@ html, body{
 
 <div class="video-container">
 
-    <!-- put your downloaded reel here -->
-    <video autoplay muted loop playsinline>
-        <source src="../videos/reel.mp4" type="video/mp4">
-    </video>
+<video autoplay muted loop playsinline>
+    <source src="<%=request.getContextPath()%>/videos/reel.mp4" type="video/mp4">
+</video>
 
     <div class="overlay"></div>
 
