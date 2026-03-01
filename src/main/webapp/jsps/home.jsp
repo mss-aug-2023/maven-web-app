@@ -4,165 +4,94 @@
 <head>
 <title>Mithun Technologies</title>
 
-<link href="../images/mithunlogo.jpg" rel="icon">
-
 <style>
-
-body{
+html, body{
     margin:0;
+    padding:0;
+    height:100%;
     font-family: Arial, Helvetica, sans-serif;
-    background:#ffffff;
 }
 
-/* ---------------- HERO SECTION ---------------- */
-
-.hero{
-    height:80vh;
-    background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
-                url("../images/mithunlogo.jpg");
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:white;
-}
-
-.hero h1{
-    font-size:48px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    font-size:20px;
-    max-width:700px;
-}
-
-/* ---------------- SECTION TITLE ---------------- */
-
-.section-title{
-    text-align:center;
-    margin:50px 0 20px 0;
-    font-size:32px;
-    letter-spacing:2px;
-}
-
-/* ---------------- CARDS ---------------- */
-
-.cards{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    padding:20px 40px 60px 40px;
-}
-
-.card{
-    width:280px;
-    text-align:center;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-    transition:transform .3s;
-    background:white;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-}
-
-.card img{
+/* full screen video */
+.video-container{
+    position:relative;
+    height:100vh;
     width:100%;
-    height:280px;
+    overflow:hidden;
+}
+
+.video-container video{
+    position:absolute;
+    top:50%;
+    left:50%;
+    min-width:100%;
+    min-height:100%;
+    transform:translate(-50%,-50%);
     object-fit:cover;
 }
 
-.card h3{
-    padding:15px;
-    margin:0;
+/* dark overlay */
+.overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,0.45);
 }
 
-/* ---------------- FOOTER ---------------- */
-
-.footer{
-    background:#111;
+/* text on reel */
+.content{
+    position:absolute;
+    bottom:60px;
+    left:40px;
     color:white;
-    text-align:center;
-    padding:25px;
-    font-size:14px;
+    z-index:2;
+    max-width:600px;
 }
 
-.footer a{
-    color:#4da3ff;
-    text-decoration:none;
+.content h1{
+    font-size:40px;
+    margin:0 0 10px 0;
 }
 
-.service-link{
-    text-align:center;
-    margin-bottom:30px;
+.content p{
     font-size:18px;
+    margin:5px 0;
 }
 
+.content a{
+    color:#00c3ff;
+    text-decoration:none;
+    font-weight:bold;
+}
 </style>
-
 </head>
 
 <body>
 
-<!-- ================= HERO ================= -->
+<div class="video-container">
 
-<div class="hero">
-    <div>
+    <!-- put your downloaded reel here -->
+    <video autoplay muted loop playsinline>
+        <source src="../videos/reel.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content">
         <h1>Mithun Technologies</h1>
+        <p>Learn AWS | DevOps | Docker | Kubernetes | Terraform</p>
+        <p>Trainer : Bhaskar Reddy Lacchannagari</p>
+        <p>Bengaluru</p>
+
         <p>
-            Learn AWS, DevOps, Jenkins, Docker, Kubernetes, Terraform and Cloud
-            from real industry experts.
-        </p>
-        <p>
-            Trainer : Bhaskar Reddy Lacchannagari – Bengaluru
+            <a href="../services/employee/getEmployeeDetails">
+                Get Employee Details (API)
+            </a>
         </p>
     </div>
-</div>
 
-<!-- ================= TITLE ================= -->
-
-<div class="section-title">OUR ROLES</div>
-
-<!-- ================= CARDS ================= -->
-
-<div class="cards">
-
-    <div class="card">
-        <img src="../images/mithunlogo.jpg">
-        <h3>THE TRAINER</h3>
-    </div>
-
-    <div class="card">
-        <img src="../images/mithunlogo.jpg">
-        <h3>THE DEVOPS ENGINEER</h3>
-    </div>
-
-</div>
-
-<!-- ================= SERVICE LINK ================= -->
-
-<div class="service-link">
-    Service :
-    <a href="../services/employee/getEmployeeDetails">
-        Get Employee Details (API)
-    </a>
-</div>
-
-<!-- ================= FOOTER ================= -->
-
-<div class="footer">
-    Mithun Technologies – Marathahalli, Bengaluru <br>
-    Phone : +91 9980923216 <br>
-    Email : Devopstrainingblr@gmail.com <br><br>
-
-    <a href="mailto:Devopstrainingblr@gmail.com">Mail to Mithun Technologies</a>
-    <br><br>
-    © 2025 Mithun Technologies
 </div>
 
 </body>
